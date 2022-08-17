@@ -1,0 +1,32 @@
+dataset_name: synthetic
+model_type: nn
+path: synthetic
+load: false
+rerun_ablation: true
+
+n_trials: 3
+dataset_sample_perc: 1
+dataset_n_random_features: 4
+
+explanation_methods:
+  - random
+  - deep_shap
+  - kernel_shap
+  - integrated_gradients
+perturbation_config:
+  constant_median: {}
+  marginal: {}
+  max_distance: {}
+
+baseline_config:
+  constant_median: {}
+  opposite_class:
+    nsamples: 50
+  training:
+    nsamples: 50
+  nearest_neighbors:
+    k: 5
+
+ablation_args:
+  scoring_methods: [log_loss, auroc]
+  local: true

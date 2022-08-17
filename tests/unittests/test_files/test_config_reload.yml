@@ -1,0 +1,25 @@
+dataset_name: "synthetic"
+model_type: nn
+path: "tmp"
+load: true
+rerun_ablation: true
+
+n_trials: 3
+dataset_sample_perc: 0.3
+dataset_n_random_features: 4
+
+explanation_methods:
+  - random
+  - deep_shap
+  - integrated_gradients
+perturbation_config:
+  constant_mean: {}
+  marginal: {}
+baseline_config:
+  constant_mean: {}
+  training:
+    nsamples: 20
+
+ablation_args:
+  scoring_methods: [log_loss, auroc, abs_diff]
+  local: true
