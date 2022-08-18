@@ -7,7 +7,7 @@ A library to assess the effectiveness of XAI methods through ablation.
 
 Explainable artificial intelligence (XAI) methods lack ground truth.  In its place, method developers have relied on axioms to determine desirable properties for their explanations behavior.  For high stakes uses of machine learning that require explainability, it is not sufficient to rely on axioms, as the implementation, or its usage, can fail to live up to the ideal.  A procedure frequently used to assess their utility, and to some extent their fidelity, is an *ablation study*.  By perturbing the input variables in rank order of importance, the goal is to assess the sensitivity of the model's performance.
 
-This implementation can be used to reproduce the experiments in "[BASED-XAI: Breaking Ablation Studies Down for Explainable Artificial Intelligence](https://arxiv.org/abs/2207.05566).
+This implementation can be used to reproduce the experiments in [BASED-XAI: Breaking Ablation Studies Down for Explainable Artificial Intelligence](https://arxiv.org/abs/2207.05566).
 
 ### Installation
 
