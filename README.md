@@ -103,6 +103,19 @@ To run tests:
 python -m pytest tests/unittests
 ```
 
+### Citing
+If you use `ablation` in your work, please cite our paper:
+
+```
+@inproceedings{hameed:basedxai:2022,
+  author    = {Hameed, Isha and Sharpe, Samuel and Barcklow, Daniel and Au-Yeung, Justin and Verma, Sahil and Huang, Jocelyn and Barr, Brian and Bruss, C. Bayan},
+  title     = {{BASED-XAI: Breaking Ablation Studies Down for Explainable Artificial Intelligence}},
+  year      = {2022},
+  maintitle = {ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+  booktitle = {Workshop on Machine Learning in Finance},
+}
+```
+
 ### Contributors
 
 We welcome Your interest in Capital One’s Open Source Projects (the

@@ -1,3 +1,4 @@
+import os
 import re
 from pathlib import Path
 from typing import List
@@ -26,11 +27,13 @@ PROJECT_URLS = {
 # fmt: on
 
 CLASSIFIERS = [
-    "Intended Audience :: Everyone",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Natural Language :: English",
     "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: Apache Software License",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
 ]
 
 # No versioning on extras for dev, always grab the latest
@@ -54,7 +57,7 @@ EXTRAS_REQUIRE = {
         "flake8-docstrings",
         "edgetest",
     ],
-    # "build": ["twine", "wheel"],
+    "build": ["twine", "wheel"],
 }
 
 EXTRAS_REQUIRE["dev"] = (
@@ -84,6 +87,11 @@ VERSION = find_meta("version")
 URL = find_meta("url")
 LONG = "Ablation studies for evaluating XAI methods"
 
+data_dir = "ablation/data"
+data_files = [
+    (d, [os.path.join(d, f) for f in files])
+    for d, _, files in os.walk(data_dir)
+]
 ####################################################################################################
 # Installation functions
 ####################################################################################################
@@ -98,11 +106,7 @@ def install_pkg():
         long_description=LONG,
         url=URL,
         project_urls=PROJECT_URLS,
-        # author=find_meta("author"),
-        # author_email=find_meta("email"),
-        # maintainer=find_meta("author"),
-        # maintainer_email=find_meta("email"),
-        # license=LICENSE,
+        author="Samuel Sharpe, Daniel Barcklow, Isha Hameed, Justin Au-Yeung, Brian Barr",
         python_requires=">=3.8.0",
         packages=PACKAGES,
         install_requires=INSTALL_REQUIRES,
@@ -110,6 +114,7 @@ def install_pkg():
         extras_require=EXTRAS_REQUIRE,
         include_package_data=True,
         zip_safe=False,
+        data_files=data_files,
     )
 
 
