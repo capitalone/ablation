@@ -16,7 +16,7 @@ Pip
 ```sh
 conda create -n ablation python=3.9 --yes
 source activate ablation
-pip install -e .
+pip install ablation
 ```
 
 ### Contributions
