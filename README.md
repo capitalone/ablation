@@ -16,7 +16,7 @@ Pip
 ```sh
 conda create -n ablation python=3.9 --yes
 source activate ablation
-pip install -e .
+pip install ablation
 ```
 
 ### Contributions
@@ -79,8 +79,9 @@ results = exp.run_exp()
 ```
 ### Replicate experiments
 
-Experiments for the paper used `pytorch_lightning==1.5.7`. Due to vulnerabilities, we needed to update to a more recent version.  In order to accurately reproduce the experiments in the paper, revert to the previous version:
+Experiments for the paper used `pytorch_lightning==1.5.7`. Due to vulnerabilities, we needed to update to a more recent version.  In order to accurately reproduce the experiments in the paper, install release `v0.1.0` and revert to the previous version of pytorch lightning:
 ```
+pip install ablation==0.1.0
 pip install pytorch_lightning==1.5.7
 ```
 
