@@ -8,8 +8,6 @@ import numpy as np
 from numpy.random import permutation, randn
 from scipy import stats
 from scipy.ndimage import gaussian_filter
-
-# from shap import sample
 from sklearn import base
 from sklearn.neighbors import NearestNeighbors
 

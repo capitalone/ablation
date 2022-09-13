@@ -19,9 +19,6 @@ from .distributions import (
 from .utils.general import sample
 from .utils.transform import le_to_ohe, ohe_to_le
 
-# from shap import sample
-
-
 BASELINES = [
     "gaussian_blur",
     "gaussian_blur_permutation",
