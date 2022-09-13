@@ -14,7 +14,9 @@ from .utils.evaluate import append_dict_lists, eval_model_performance
 from .utils.transform import le_to_ohe, ohe_to_le
 
 
-def local_explanation_importance(exp: np.ndarray, relative=False) -> np.ndarray:
+def local_explanation_importance(
+    exp: np.ndarray, relative=False
+) -> np.ndarray:
     """Average absolute value of ranked local explanations. For example, the first
         value in the returned array is the average of largest local absolute feature
         importance across all samples.
@@ -117,7 +119,9 @@ class Ablation:
         # Number of perturbations at minimum = n_features
         # Additional repeat steps taken if number of scoring steps> n_features
         perturb_steps = (
-            score_steps if len(score_steps) > n_features else np.arange(n_features)
+            score_steps
+            if len(score_steps) > n_features
+            else np.arange(n_features)
         )
 
         return perturb_steps, score_steps, pct_steps
