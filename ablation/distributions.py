@@ -8,10 +8,10 @@ import numpy as np
 from numpy.random import permutation, randn
 from scipy import stats
 from scipy.ndimage import gaussian_filter
-from shap import sample
 from sklearn import base
 from sklearn.neighbors import NearestNeighbors
 
+from .utils.general import sample
 from .utils.transform import le_to_ohe, ohe_to_le
 
 # Main differences between perturbations and baselines:
@@ -54,7 +54,9 @@ def categorical_perturbation_case(**kwargs) -> bool:
     return False
 
 
-def constant(X: np.ndarray, value: Optional[float] = 0.0, **kwargs) -> np.ndarray:
+def constant(
+    X: np.ndarray, value: Optional[float] = 0.0, **kwargs
+) -> np.ndarray:
     """Generate a constant distribution
 
     Args:
@@ -104,7 +106,9 @@ def constant_median(X: np.ndarray, **kwargs) -> np.ndarray:
         median_mode = np.zeros((1, X_LE.shape[1]))  # To keep dimensions
         for (idx, mapping) in enumerate(kwargs["agg_map"]):
             if len(mapping) > 1:
-                median_mode[0][idx] = stats.mode(X_LE[:, idx], axis=0)[0][0].astype(int)
+                median_mode[0][idx] = stats.mode(X_LE[:, idx], axis=0)[0][
+                    0
+                ].astype(int)
             else:
                 median_mode[0][idx] = np.median(X_LE[:, idx], axis=0)
         return median_mode
@@ -133,7 +137,9 @@ def max_distance(X: np.ndarray, X_obs: np.ndarray, **kwargs) -> np.ndarray:
 
         # Maximum distance implemented for numericals.
         # Categoricals are uniformly sampled instead.
-        modified_max_distance = np.zeros((X_obs_LE.shape[0], X_obs_LE.shape[1]))
+        modified_max_distance = np.zeros(
+            (X_obs_LE.shape[0], X_obs_LE.shape[1])
+        )
 
         for (idx, mapping) in enumerate(kwargs["agg_map"]):
             if len(mapping) > 1:
@@ -300,7 +306,9 @@ def opposite_class(
     Returns:
         np.array: sample of training data with opposite class
     """
-    assert nsamples is not None, "nsamples must be specified for opposite_class"
+    assert (
+        nsamples is not None
+    ), "nsamples must be specified for opposite_class"
 
     if categorical_perturbation_case(**kwargs):
         X_LE = ohe_to_le(X, kwargs["agg_map"])
@@ -320,7 +328,8 @@ def opposite_class(
         return np.array([class_dict[y_] for y_ in pred_y_obs])
 
     class_dict = {
-        y_: sample(X[y != y_], nsamples, random_state=None) for y_ in np.unique(y)
+        y_: sample(X[y != y_], nsamples, random_state=None)
+        for y_ in np.unique(y)
     }
 
     sample_sizes = [len(s) for s in class_dict.values()]
@@ -333,7 +342,9 @@ def opposite_class(
     return np.array([class_dict[y_] for y_ in pred_y_obs])
 
 
-def nearest_neighbors(X: np.ndarray, X_obs: np.ndarray, k: int, **kwargs) -> np.ndarray:
+def nearest_neighbors(
+    X: np.ndarray, X_obs: np.ndarray, k: int, **kwargs
+) -> np.ndarray:
     """Nearest neighbors from reference set
 
     Args:
@@ -393,7 +404,9 @@ def nearest_neighbors_counterfactual(
         # Get indices of nn for each observation based on predicted class
         nn = np.concatenate(
             [
-                class_dict[y_].kneighbors(x.reshape(1, -1), return_distance=False)
+                class_dict[y_].kneighbors(
+                    x.reshape(1, -1), return_distance=False
+                )
                 for (x, y_) in zip(X_obs_LE, pred_y_obs)
             ],
             axis=0,
@@ -403,7 +416,9 @@ def nearest_neighbors_counterfactual(
 
     # Create NN for each class containing other classes
     class_dict = {
-        y_: NearestNeighbors(n_neighbors=k, algorithm="ball_tree").fit(X[y != y_])
+        y_: NearestNeighbors(n_neighbors=k, algorithm="ball_tree").fit(
+            X[y != y_]
+        )
         for y_ in classes
     }
     # Get indices of nn for each observation based on predicted class

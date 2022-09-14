@@ -1,7 +1,6 @@
 from typing import Optional
 
 import numpy as np
-from shap import sample
 
 from . import distributions
 from .distributions import (
@@ -17,6 +16,7 @@ from .distributions import (
     opposite_class,
     training,
 )
+from .utils.general import sample
 from .utils.transform import le_to_ohe, ohe_to_le
 
 BASELINES = [
@@ -103,7 +103,9 @@ def generate_baseline_distribution(
     elif method == "nearest_neighbors":
         baseline = nearest_neighbors(X, X_obs, **kwargs)
     elif method == "nearest_neighbors_counterfactual":
-        baseline = nearest_neighbors_counterfactual(X, y, X_obs, y_obs, **kwargs)
+        baseline = nearest_neighbors_counterfactual(
+            X, y, X_obs, y_obs, **kwargs
+        )
     elif method == "opposite_class":
         baseline = opposite_class(X, y, y_obs, nsamples, **kwargs)
     else:
