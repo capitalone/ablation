@@ -1,0 +1,1322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>ablation.dataset API documentation</title>
+<meta name="description" content="data_loader.py
+About: Load datasets for Ablation" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>ablation.dataset</code></h1>
+</header>
+<section id="section-intro">
+<p>data_loader.py
+About: Load datasets for Ablation</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+data_loader.py
+About: Load datasets for Ablation
+&#34;&#34;&#34;
+from dataclasses import dataclass
+from os import path
+from typing import List, Union
+
+import numpy as np
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+DATA_PATH = path.join(path.dirname(path.abspath(__file__)), &#34;data&#34;)
+
+
+@dataclass
+class NumpyDataset:
+    X_train: np.array
+    y_train: np.array
+    X_test: np.array
+    y_test: np.array
+    n_classes: int
+
+    # Feature names (pre and post encoding, respectively)
+    feature_names: List[str]
+    original_feature_names: List[str]
+
+    def __post_init__(self):
+        &#34;&#34;&#34;
+        Populate necessary fields after dataclass initialization.  In this
+        case, generate the aggregation mapping.
+        &#34;&#34;&#34;
+        self._agg_map = self.calculate_aggregation_map()
+
+    def stratified_subsample(self, percentage, random_state=42):
+        _, self.X_train, _, self.y_train = train_test_split(
+            self.X_train,
+            self.y_train,
+            test_size=int(len(self.y_train) * percentage),
+            random_state=random_state,
+            stratify=self.y_train,
+        )
+        _, self.X_test, _, self.y_test = train_test_split(
+            self.X_test,
+            self.y_test,
+            test_size=int(len(self.y_test) * percentage),
+            random_state=random_state,
+            stratify=self.y_test,
+        )
+
+    def add_random_features(self, n_rand_features=4, random_state=42):
+
+        np.random.seed(random_state)
+        random_train = np.random.normal(0, 1, (len(self.X_train), n_rand_features))
+        random_test = np.random.normal(0, 1, (len(self.X_test), n_rand_features))
+        self.X_train = np.concatenate([self.X_train, random_train], -1)
+        self.X_test = np.concatenate([self.X_test, random_test], -1)
+
+        # Calculate the random feature names
+        random_feature_names = [f&#34;#RANDOM{idx}#&#34; for idx in range(n_rand_features)]
+
+        # Add random feature names to list of post-encoded features
+        self.feature_names += random_feature_names
+
+        # Add random feature names to list of original features
+        self.original_feature_names += random_feature_names
+
+        # Re-calculate map since features have been added
+        self._agg_map = self.calculate_aggregation_map()
+
+    def calculate_aggregation_map(self) -&gt; Union[List[List[int]], None]:
+        &#34;&#34;&#34;
+        Generate a list of indices to map sparse to dense.  If the feature sets match
+        no mapping can be created (except for 1-to-1).  Return None and downstream
+        processes should interpret that as there being no difference in pre and post
+        encoded features.
+        &#34;&#34;&#34;
+        if len(self.feature_names) == len(self.original_feature_names):
+            return None
+        else:
+            return [
+                [
+                    j
+                    for (j, val) in enumerate(self.feature_names)
+                    if ((x == val) or (x == &#34;_&#34;.join(val.split(&#34;_&#34;)[:-1])))
+                ]
+                for (i, x) in enumerate(self.original_feature_names)
+            ]
+
+    @property
+    def agg_map(self):
+        return self._agg_map
+
+    @property
+    def random_feat_idx(self):
+        return np.array(
+            [idx for (idx, val) in enumerate(self.feature_names) if &#34;#RANDOM&#34; in val]
+        )
+
+    @property
+    def dense_random_feat_idx(self):
+        return np.array(
+            [
+                idx
+                for (idx, val) in enumerate(self.original_feature_names)
+                if &#34;#RANDOM&#34; in val
+            ]
+        )
+
+
+def load_data(
+    dataset: str,
+    dataset_sample_percentage: float = 1,
+    n_rand_features: int = 0,
+) -&gt; NumpyDataset:
+    &#34;&#34;&#34;Load preprocessed data from the list
+
+    Args:
+        dataset (str): Dataset name to be loaded
+        dataset_sample_percentage (float): stratified subsample of dataset
+        n_rand_features (int): number of random features to append for sanity checking explanation
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+
+    options = {
+        &#34;german&#34;: prepare_german_data,
+        &#34;adult&#34;: prepare_adult_data,
+        &#34;spambase&#34;: prepare_spambase_data,
+        &#34;har&#34;: prepare_har_data,
+        &#34;synthetic&#34;: prepare_synthetic_data,
+        &#34;synthetic_multiclass&#34;: prepare_synthetic_multiclass_data,
+        &#34;synthetic_cat&#34;: prepare_synthetic_categorical_data,
+    }
+    dataset = options[dataset]()
+    if dataset_sample_percentage &lt; 1:
+        dataset.stratified_subsample(dataset_sample_percentage)
+    if n_rand_features &gt; 0:
+        dataset.add_random_features(n_rand_features)
+    return dataset
+
+
+def prepare_german_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare German dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+
+    data = pd.read_csv(path.join(DATA_PATH, &#34;MyGermanData.csv&#34;))
+    X, y = data.drop(&#34;credit.rating&#34;, axis=1), data[&#34;credit.rating&#34;]
+
+    cat_ix = X.select_dtypes(include=[&#34;object&#34;]).columns
+    num_ix = X.select_dtypes(include=[&#34;int64&#34;]).columns
+
+    X_train, y_train, X_test, y_test = split_dataset(
+        X, y.values.flatten(), test_perc=0.2
+    )
+
+    encoder = OneHotEncoder()
+    scaler = StandardScaler()
+
+    ct = ColumnTransformer(
+        [(&#34;categoricals&#34;, encoder, cat_ix), (&#34;numericals&#34;, scaler, num_ix)],
+        remainder=&#34;passthrough&#34;,
+        verbose_feature_names_out=False,
+    )
+
+    X_train = ct.fit_transform(X_train)
+    X_test = ct.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=2,
+        feature_names=list(ct.get_feature_names_out()),
+        original_feature_names=cat_ix.tolist() + num_ix.tolist(),
+    )
+
+
+def prepare_adult_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare Adult dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+
+    column_names = [
+        &#34;age&#34;,
+        &#34;workclass&#34;,
+        &#34;fnlwgt&#34;,
+        &#34;education&#34;,
+        &#34;education-num&#34;,
+        &#34;marital-status&#34;,
+        &#34;occupation&#34;,
+        &#34;relationship&#34;,
+        &#34;race&#34;,
+        &#34;sex&#34;,
+        &#34;capital-gain&#34;,
+        &#34;capital-loss&#34;,
+        &#34;hours-per-week&#34;,
+        &#34;native-country&#34;,
+        &#34;income-over-50k&#34;,
+    ]
+
+    training_data = pd.read_csv(
+        path.join(DATA_PATH, &#34;adult.data&#34;), names=column_names, index_col=False
+    )
+    test_data = pd.read_csv(
+        path.join(DATA_PATH, &#34;adult.test&#34;), names=column_names, index_col=False
+    )
+
+    training_data[&#34;income-over-50k&#34;] = training_data[&#34;income-over-50k&#34;].map(
+        {&#34; &gt;50K&#34;: 1, &#34; &lt;=50K&#34;: 0}
+    )
+    test_data[&#34;income-over-50k&#34;] = test_data[&#34;income-over-50k&#34;].map(
+        {&#34; &gt;50K&#34;: 1, &#34; &lt;=50K&#34;: 0}
+    )
+
+    X_train = training_data.drop(&#34;income-over-50k&#34;, axis=1)
+    y_train = training_data[&#34;income-over-50k&#34;]
+    X_test = test_data.drop(&#34;income-over-50k&#34;, axis=1)
+    y_test = test_data[&#34;income-over-50k&#34;]
+
+    cat_ix = X_train.select_dtypes(include=[&#34;object&#34;]).columns
+    num_ix = X_train.select_dtypes(include=[&#34;int64&#34;]).columns
+
+    encoder = OneHotEncoder()
+    scaler = StandardScaler()
+
+    ct = ColumnTransformer(
+        [(&#34;categoricals&#34;, encoder, cat_ix), (&#34;numericals&#34;, scaler, num_ix)],
+        remainder=&#34;passthrough&#34;,
+        verbose_feature_names_out=False,
+    )
+
+    X_train = ct.fit_transform(X_train)
+    X_test = ct.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train.toarray(),
+        y_train=y_train.values.flatten(),
+        X_test=X_test.toarray(),
+        y_test=y_test.values.flatten(),
+        n_classes=2,
+        feature_names=list(ct.get_feature_names_out()),
+        original_feature_names=cat_ix.tolist() + num_ix.tolist(),
+    )
+
+
+def prepare_spambase_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare Spambase dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    X = pd.read_csv(path.join(DATA_PATH, &#34;spambase-X.csv&#34;))
+    y = pd.read_csv(path.join(DATA_PATH, &#34;spambase-y.csv&#34;))
+
+    X_train, y_train, X_test, y_test = split_dataset(
+        X.values, y.values.flatten(), test_perc=0.2
+    )
+
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=list(X.columns),
+        original_feature_names=list(X.columns),
+    )
+
+
+def prepare_har_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare HAR dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    # Load Datasets
+    x_train = pd.read_pickle(path.join(DATA_PATH, &#34;har_x_train.pkl&#34;))
+    y_train = pd.read_pickle(path.join(DATA_PATH, &#34;har_y_train.pkl&#34;))
+    x_test = pd.read_pickle(path.join(DATA_PATH, &#34;har_x_test.pkl&#34;))
+    y_test = pd.read_pickle(path.join(DATA_PATH, &#34;har_y_test.pkl&#34;))
+
+    # Load Columns
+    feature_names = pd.read_table(
+        path.join(DATA_PATH, &#34;har_features.txt&#34;),
+        sep=&#34;\s+&#34;,
+        header=None,
+        squeeze=True,
+    )
+    feature_names = feature_names[1].values
+
+    # Standard Scaler
+    scaler = StandardScaler().fit(x_train)
+    x_train = scaler.transform(x_train)
+    x_test = scaler.transform(x_test)
+
+    # # Convert y to numpy array
+    y_train = np.array(y_train)
+    y_test = np.array(y_test)
+
+    # Change number from 0 to n_classes -1
+    y_train -= 1
+    y_test -= 1
+
+    return NumpyDataset(
+        X_train=x_train,
+        y_train=y_train,
+        X_test=x_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y_train)),
+        feature_names=list(feature_names),
+        original_feature_names=list(feature_names),
+    )
+
+
+def split_dataset(
+    X: np.ndarray,
+    y: np.ndarray,
+    val_perc: float = 0.0,
+    test_perc: float = 0.2,
+):
+
+    assert test_perc &gt; 0, &#34;Must have a test set&#34;
+
+    (
+        X_train,
+        X_test,
+        y_train,
+        y_test,
+    ) = train_test_split(X, y, test_size=test_perc, random_state=42)
+
+    if val_perc &gt; 0:
+        (X_train, X_val, y_train, y_val,) = train_test_split(
+            X_train,
+            y_train,
+            test_size=val_perc / (1 - test_perc),
+            random_state=42,
+        )
+        return X_train, y_train, X_val, y_val, X_test, y_test
+    return X_train, y_train, X_test, y_test
+
+
+def prepare_synthetic_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare synthetic dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    np.random.seed(42)
+    d = 20
+    n = 1000
+    X = np.random.normal(size=(n, d))
+    coef = np.random.normal(size=(d, 1))
+    prob = 1 / (1 + np.exp(-X @ coef))
+    y = (prob &gt; np.random.rand(n, 1)).astype(int).squeeze()
+    X_train, y_train, X_test, y_test = split_dataset(X, y, test_perc=0.2)
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+        original_feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+    )
+
+
+def prepare_synthetic_multiclass_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare synthetic dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    np.random.seed(42)
+    d = 20
+    n = 1000
+    n_classes = 3
+    X = np.random.normal(size=(n, d))
+    coef = np.random.normal(size=(d, n_classes))
+    prob = np.exp(X @ coef) / np.exp(X @ coef).sum(-1, keepdims=True)
+    y = np.array([np.random.choice(list(range(n_classes)), p=p) for p in prob])
+    X_train, y_train, X_test, y_test = split_dataset(X, y, test_perc=0.2)
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+        original_feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+    )
+
+
+def prepare_synthetic_categorical_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare synthetic dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    np.random.seed(42)
+
+    d = 20
+    n = 1000
+    n_cat = 5
+    n_cont = d - n_cat
+    levels = 6
+
+    X_cont = np.random.normal(size=(n, n_cont))
+    X_cat = (np.random.rand(n, n_cat) * levels).astype(int)
+    X = np.hstack([X_cont, X_cat])
+    coef_cont = np.random.normal(size=(n_cont, 1))
+    coef_cat = np.random.normal(size=(1, n_cat, levels))
+
+    X_cat_mult_coef = (np.eye(levels)[X_cat] * coef_cat).sum(axis=-1)
+    logit_cat = X_cat_mult_coef.sum(axis=-1, keepdims=True)
+
+    logit_cont = X_cont @ coef_cont
+    logits = logit_cont + logit_cat
+    prob = 1 / (1 + np.exp(-logits))
+    y = (prob &gt; np.random.rand(n, 1)).astype(int).squeeze()
+
+    X_df = pd.DataFrame(X, columns=[f&#34;feat_{i}&#34; for i in range(d)])
+    cat_feat = [f&#34;feat_{i}&#34; for i in range(n_cont, d)]
+    cont_feat = [f&#34;feat_{i}&#34; for i in range(n_cont)]
+    X_df[cat_feat] = X_df[cat_feat].astype(int)
+    encoder = OneHotEncoder()
+    scaler = StandardScaler()
+    X_train, y_train, X_test, y_test = split_dataset(X_df, y, test_perc=0.2)
+    ct = ColumnTransformer(
+        [
+            (&#34;categoricals&#34;, encoder, cat_feat),
+            (&#34;numericals&#34;, scaler, cont_feat),
+        ],
+        remainder=&#34;passthrough&#34;,
+        verbose_feature_names_out=False,
+    )
+
+    X_train = ct.fit_transform(X_train)
+    X_test = ct.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=list(ct.get_feature_names_out()),
+        original_feature_names=list(X_df.columns),
+    )</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="ablation.dataset.load_data"><code class="name flex">
+<span>def <span class="ident">load_data</span></span>(<span>dataset: str, dataset_sample_percentage: float = 1, n_rand_features: int = 0) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Load preprocessed data from the list</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dataset</code></strong> :&ensp;<code>str</code></dt>
+<dd>Dataset name to be loaded</dd>
+<dt><strong><code>dataset_sample_percentage</code></strong> :&ensp;<code>float</code></dt>
+<dd>stratified subsample of dataset</dd>
+<dt><strong><code>n_rand_features</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of random features to append for sanity checking explanation</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_data(
+    dataset: str,
+    dataset_sample_percentage: float = 1,
+    n_rand_features: int = 0,
+) -&gt; NumpyDataset:
+    &#34;&#34;&#34;Load preprocessed data from the list
+
+    Args:
+        dataset (str): Dataset name to be loaded
+        dataset_sample_percentage (float): stratified subsample of dataset
+        n_rand_features (int): number of random features to append for sanity checking explanation
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+
+    options = {
+        &#34;german&#34;: prepare_german_data,
+        &#34;adult&#34;: prepare_adult_data,
+        &#34;spambase&#34;: prepare_spambase_data,
+        &#34;har&#34;: prepare_har_data,
+        &#34;synthetic&#34;: prepare_synthetic_data,
+        &#34;synthetic_multiclass&#34;: prepare_synthetic_multiclass_data,
+        &#34;synthetic_cat&#34;: prepare_synthetic_categorical_data,
+    }
+    dataset = options[dataset]()
+    if dataset_sample_percentage &lt; 1:
+        dataset.stratified_subsample(dataset_sample_percentage)
+    if n_rand_features &gt; 0:
+        dataset.add_random_features(n_rand_features)
+    return dataset</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_adult_data"><code class="name flex">
+<span>def <span class="ident">prepare_adult_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare Adult dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_adult_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare Adult dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+
+    column_names = [
+        &#34;age&#34;,
+        &#34;workclass&#34;,
+        &#34;fnlwgt&#34;,
+        &#34;education&#34;,
+        &#34;education-num&#34;,
+        &#34;marital-status&#34;,
+        &#34;occupation&#34;,
+        &#34;relationship&#34;,
+        &#34;race&#34;,
+        &#34;sex&#34;,
+        &#34;capital-gain&#34;,
+        &#34;capital-loss&#34;,
+        &#34;hours-per-week&#34;,
+        &#34;native-country&#34;,
+        &#34;income-over-50k&#34;,
+    ]
+
+    training_data = pd.read_csv(
+        path.join(DATA_PATH, &#34;adult.data&#34;), names=column_names, index_col=False
+    )
+    test_data = pd.read_csv(
+        path.join(DATA_PATH, &#34;adult.test&#34;), names=column_names, index_col=False
+    )
+
+    training_data[&#34;income-over-50k&#34;] = training_data[&#34;income-over-50k&#34;].map(
+        {&#34; &gt;50K&#34;: 1, &#34; &lt;=50K&#34;: 0}
+    )
+    test_data[&#34;income-over-50k&#34;] = test_data[&#34;income-over-50k&#34;].map(
+        {&#34; &gt;50K&#34;: 1, &#34; &lt;=50K&#34;: 0}
+    )
+
+    X_train = training_data.drop(&#34;income-over-50k&#34;, axis=1)
+    y_train = training_data[&#34;income-over-50k&#34;]
+    X_test = test_data.drop(&#34;income-over-50k&#34;, axis=1)
+    y_test = test_data[&#34;income-over-50k&#34;]
+
+    cat_ix = X_train.select_dtypes(include=[&#34;object&#34;]).columns
+    num_ix = X_train.select_dtypes(include=[&#34;int64&#34;]).columns
+
+    encoder = OneHotEncoder()
+    scaler = StandardScaler()
+
+    ct = ColumnTransformer(
+        [(&#34;categoricals&#34;, encoder, cat_ix), (&#34;numericals&#34;, scaler, num_ix)],
+        remainder=&#34;passthrough&#34;,
+        verbose_feature_names_out=False,
+    )
+
+    X_train = ct.fit_transform(X_train)
+    X_test = ct.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train.toarray(),
+        y_train=y_train.values.flatten(),
+        X_test=X_test.toarray(),
+        y_test=y_test.values.flatten(),
+        n_classes=2,
+        feature_names=list(ct.get_feature_names_out()),
+        original_feature_names=cat_ix.tolist() + num_ix.tolist(),
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_german_data"><code class="name flex">
+<span>def <span class="ident">prepare_german_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare German dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_german_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare German dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+
+    data = pd.read_csv(path.join(DATA_PATH, &#34;MyGermanData.csv&#34;))
+    X, y = data.drop(&#34;credit.rating&#34;, axis=1), data[&#34;credit.rating&#34;]
+
+    cat_ix = X.select_dtypes(include=[&#34;object&#34;]).columns
+    num_ix = X.select_dtypes(include=[&#34;int64&#34;]).columns
+
+    X_train, y_train, X_test, y_test = split_dataset(
+        X, y.values.flatten(), test_perc=0.2
+    )
+
+    encoder = OneHotEncoder()
+    scaler = StandardScaler()
+
+    ct = ColumnTransformer(
+        [(&#34;categoricals&#34;, encoder, cat_ix), (&#34;numericals&#34;, scaler, num_ix)],
+        remainder=&#34;passthrough&#34;,
+        verbose_feature_names_out=False,
+    )
+
+    X_train = ct.fit_transform(X_train)
+    X_test = ct.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=2,
+        feature_names=list(ct.get_feature_names_out()),
+        original_feature_names=cat_ix.tolist() + num_ix.tolist(),
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_har_data"><code class="name flex">
+<span>def <span class="ident">prepare_har_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare HAR dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_har_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare HAR dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    # Load Datasets
+    x_train = pd.read_pickle(path.join(DATA_PATH, &#34;har_x_train.pkl&#34;))
+    y_train = pd.read_pickle(path.join(DATA_PATH, &#34;har_y_train.pkl&#34;))
+    x_test = pd.read_pickle(path.join(DATA_PATH, &#34;har_x_test.pkl&#34;))
+    y_test = pd.read_pickle(path.join(DATA_PATH, &#34;har_y_test.pkl&#34;))
+
+    # Load Columns
+    feature_names = pd.read_table(
+        path.join(DATA_PATH, &#34;har_features.txt&#34;),
+        sep=&#34;\s+&#34;,
+        header=None,
+        squeeze=True,
+    )
+    feature_names = feature_names[1].values
+
+    # Standard Scaler
+    scaler = StandardScaler().fit(x_train)
+    x_train = scaler.transform(x_train)
+    x_test = scaler.transform(x_test)
+
+    # # Convert y to numpy array
+    y_train = np.array(y_train)
+    y_test = np.array(y_test)
+
+    # Change number from 0 to n_classes -1
+    y_train -= 1
+    y_test -= 1
+
+    return NumpyDataset(
+        X_train=x_train,
+        y_train=y_train,
+        X_test=x_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y_train)),
+        feature_names=list(feature_names),
+        original_feature_names=list(feature_names),
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_spambase_data"><code class="name flex">
+<span>def <span class="ident">prepare_spambase_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare Spambase dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_spambase_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare Spambase dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    X = pd.read_csv(path.join(DATA_PATH, &#34;spambase-X.csv&#34;))
+    y = pd.read_csv(path.join(DATA_PATH, &#34;spambase-y.csv&#34;))
+
+    X_train, y_train, X_test, y_test = split_dataset(
+        X.values, y.values.flatten(), test_perc=0.2
+    )
+
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=list(X.columns),
+        original_feature_names=list(X.columns),
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_synthetic_categorical_data"><code class="name flex">
+<span>def <span class="ident">prepare_synthetic_categorical_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare synthetic dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_synthetic_categorical_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare synthetic dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    np.random.seed(42)
+
+    d = 20
+    n = 1000
+    n_cat = 5
+    n_cont = d - n_cat
+    levels = 6
+
+    X_cont = np.random.normal(size=(n, n_cont))
+    X_cat = (np.random.rand(n, n_cat) * levels).astype(int)
+    X = np.hstack([X_cont, X_cat])
+    coef_cont = np.random.normal(size=(n_cont, 1))
+    coef_cat = np.random.normal(size=(1, n_cat, levels))
+
+    X_cat_mult_coef = (np.eye(levels)[X_cat] * coef_cat).sum(axis=-1)
+    logit_cat = X_cat_mult_coef.sum(axis=-1, keepdims=True)
+
+    logit_cont = X_cont @ coef_cont
+    logits = logit_cont + logit_cat
+    prob = 1 / (1 + np.exp(-logits))
+    y = (prob &gt; np.random.rand(n, 1)).astype(int).squeeze()
+
+    X_df = pd.DataFrame(X, columns=[f&#34;feat_{i}&#34; for i in range(d)])
+    cat_feat = [f&#34;feat_{i}&#34; for i in range(n_cont, d)]
+    cont_feat = [f&#34;feat_{i}&#34; for i in range(n_cont)]
+    X_df[cat_feat] = X_df[cat_feat].astype(int)
+    encoder = OneHotEncoder()
+    scaler = StandardScaler()
+    X_train, y_train, X_test, y_test = split_dataset(X_df, y, test_perc=0.2)
+    ct = ColumnTransformer(
+        [
+            (&#34;categoricals&#34;, encoder, cat_feat),
+            (&#34;numericals&#34;, scaler, cont_feat),
+        ],
+        remainder=&#34;passthrough&#34;,
+        verbose_feature_names_out=False,
+    )
+
+    X_train = ct.fit_transform(X_train)
+    X_test = ct.transform(X_test)
+
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=list(ct.get_feature_names_out()),
+        original_feature_names=list(X_df.columns),
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_synthetic_data"><code class="name flex">
+<span>def <span class="ident">prepare_synthetic_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare synthetic dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_synthetic_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare synthetic dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    np.random.seed(42)
+    d = 20
+    n = 1000
+    X = np.random.normal(size=(n, d))
+    coef = np.random.normal(size=(d, 1))
+    prob = 1 / (1 + np.exp(-X @ coef))
+    y = (prob &gt; np.random.rand(n, 1)).astype(int).squeeze()
+    X_train, y_train, X_test, y_test = split_dataset(X, y, test_perc=0.2)
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+        original_feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.prepare_synthetic_multiclass_data"><code class="name flex">
+<span>def <span class="ident">prepare_synthetic_multiclass_data</span></span>(<span>) ‑> <a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepare synthetic dataset</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></dt>
+<dd>dataset</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepare_synthetic_multiclass_data() -&gt; NumpyDataset:
+    &#34;&#34;&#34;Prepare synthetic dataset
+
+    Returns:
+        NumpyDataset: dataset
+    &#34;&#34;&#34;
+    np.random.seed(42)
+    d = 20
+    n = 1000
+    n_classes = 3
+    X = np.random.normal(size=(n, d))
+    coef = np.random.normal(size=(d, n_classes))
+    prob = np.exp(X @ coef) / np.exp(X @ coef).sum(-1, keepdims=True)
+    y = np.array([np.random.choice(list(range(n_classes)), p=p) for p in prob])
+    X_train, y_train, X_test, y_test = split_dataset(X, y, test_perc=0.2)
+    return NumpyDataset(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        n_classes=len(np.unique(y)),
+        feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+        original_feature_names=[f&#34;feat_{i}&#34; for i in range(X_train.shape[1])],
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.split_dataset"><code class="name flex">
+<span>def <span class="ident">split_dataset</span></span>(<span>X: numpy.ndarray, y: numpy.ndarray, val_perc: float = 0.0, test_perc: float = 0.2)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def split_dataset(
+    X: np.ndarray,
+    y: np.ndarray,
+    val_perc: float = 0.0,
+    test_perc: float = 0.2,
+):
+
+    assert test_perc &gt; 0, &#34;Must have a test set&#34;
+
+    (
+        X_train,
+        X_test,
+        y_train,
+        y_test,
+    ) = train_test_split(X, y, test_size=test_perc, random_state=42)
+
+    if val_perc &gt; 0:
+        (X_train, X_val, y_train, y_val,) = train_test_split(
+            X_train,
+            y_train,
+            test_size=val_perc / (1 - test_perc),
+            random_state=42,
+        )
+        return X_train, y_train, X_val, y_val, X_test, y_test
+    return X_train, y_train, X_test, y_test</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="ablation.dataset.NumpyDataset"><code class="flex name class">
+<span>class <span class="ident">NumpyDataset</span></span>
+<span>(</span><span>X_train: <built-in function array>, y_train: <built-in function array>, X_test: <built-in function array>, y_test: <built-in function array>, n_classes: int, feature_names: List[str], original_feature_names: List[str])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>NumpyDataset(X_train: <built-in function array>, y_train: <built-in function array>, X_test: <built-in function array>, y_test: <built-in function array>, n_classes: int, feature_names: List[str], original_feature_names: List[str])</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class NumpyDataset:
+    X_train: np.array
+    y_train: np.array
+    X_test: np.array
+    y_test: np.array
+    n_classes: int
+
+    # Feature names (pre and post encoding, respectively)
+    feature_names: List[str]
+    original_feature_names: List[str]
+
+    def __post_init__(self):
+        &#34;&#34;&#34;
+        Populate necessary fields after dataclass initialization.  In this
+        case, generate the aggregation mapping.
+        &#34;&#34;&#34;
+        self._agg_map = self.calculate_aggregation_map()
+
+    def stratified_subsample(self, percentage, random_state=42):
+        _, self.X_train, _, self.y_train = train_test_split(
+            self.X_train,
+            self.y_train,
+            test_size=int(len(self.y_train) * percentage),
+            random_state=random_state,
+            stratify=self.y_train,
+        )
+        _, self.X_test, _, self.y_test = train_test_split(
+            self.X_test,
+            self.y_test,
+            test_size=int(len(self.y_test) * percentage),
+            random_state=random_state,
+            stratify=self.y_test,
+        )
+
+    def add_random_features(self, n_rand_features=4, random_state=42):
+
+        np.random.seed(random_state)
+        random_train = np.random.normal(0, 1, (len(self.X_train), n_rand_features))
+        random_test = np.random.normal(0, 1, (len(self.X_test), n_rand_features))
+        self.X_train = np.concatenate([self.X_train, random_train], -1)
+        self.X_test = np.concatenate([self.X_test, random_test], -1)
+
+        # Calculate the random feature names
+        random_feature_names = [f&#34;#RANDOM{idx}#&#34; for idx in range(n_rand_features)]
+
+        # Add random feature names to list of post-encoded features
+        self.feature_names += random_feature_names
+
+        # Add random feature names to list of original features
+        self.original_feature_names += random_feature_names
+
+        # Re-calculate map since features have been added
+        self._agg_map = self.calculate_aggregation_map()
+
+    def calculate_aggregation_map(self) -&gt; Union[List[List[int]], None]:
+        &#34;&#34;&#34;
+        Generate a list of indices to map sparse to dense.  If the feature sets match
+        no mapping can be created (except for 1-to-1).  Return None and downstream
+        processes should interpret that as there being no difference in pre and post
+        encoded features.
+        &#34;&#34;&#34;
+        if len(self.feature_names) == len(self.original_feature_names):
+            return None
+        else:
+            return [
+                [
+                    j
+                    for (j, val) in enumerate(self.feature_names)
+                    if ((x == val) or (x == &#34;_&#34;.join(val.split(&#34;_&#34;)[:-1])))
+                ]
+                for (i, x) in enumerate(self.original_feature_names)
+            ]
+
+    @property
+    def agg_map(self):
+        return self._agg_map
+
+    @property
+    def random_feat_idx(self):
+        return np.array(
+            [idx for (idx, val) in enumerate(self.feature_names) if &#34;#RANDOM&#34; in val]
+        )
+
+    @property
+    def dense_random_feat_idx(self):
+        return np.array(
+            [
+                idx
+                for (idx, val) in enumerate(self.original_feature_names)
+                if &#34;#RANDOM&#34; in val
+            ]
+        )</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="ablation.dataset.NumpyDataset.X_test"><code class="name">var <span class="ident">X_test</span> : <built-in function array></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.X_train"><code class="name">var <span class="ident">X_train</span> : <built-in function array></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.feature_names"><code class="name">var <span class="ident">feature_names</span> : List[str]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.n_classes"><code class="name">var <span class="ident">n_classes</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.original_feature_names"><code class="name">var <span class="ident">original_feature_names</span> : List[str]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.y_test"><code class="name">var <span class="ident">y_test</span> : <built-in function array></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.y_train"><code class="name">var <span class="ident">y_train</span> : <built-in function array></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ablation.dataset.NumpyDataset.agg_map"><code class="name">var <span class="ident">agg_map</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def agg_map(self):
+    return self._agg_map</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.dense_random_feat_idx"><code class="name">var <span class="ident">dense_random_feat_idx</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def dense_random_feat_idx(self):
+    return np.array(
+        [
+            idx
+            for (idx, val) in enumerate(self.original_feature_names)
+            if &#34;#RANDOM&#34; in val
+        ]
+    )</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.random_feat_idx"><code class="name">var <span class="ident">random_feat_idx</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def random_feat_idx(self):
+    return np.array(
+        [idx for (idx, val) in enumerate(self.feature_names) if &#34;#RANDOM&#34; in val]
+    )</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="ablation.dataset.NumpyDataset.add_random_features"><code class="name flex">
+<span>def <span class="ident">add_random_features</span></span>(<span>self, n_rand_features=4, random_state=42)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_random_features(self, n_rand_features=4, random_state=42):
+
+    np.random.seed(random_state)
+    random_train = np.random.normal(0, 1, (len(self.X_train), n_rand_features))
+    random_test = np.random.normal(0, 1, (len(self.X_test), n_rand_features))
+    self.X_train = np.concatenate([self.X_train, random_train], -1)
+    self.X_test = np.concatenate([self.X_test, random_test], -1)
+
+    # Calculate the random feature names
+    random_feature_names = [f&#34;#RANDOM{idx}#&#34; for idx in range(n_rand_features)]
+
+    # Add random feature names to list of post-encoded features
+    self.feature_names += random_feature_names
+
+    # Add random feature names to list of original features
+    self.original_feature_names += random_feature_names
+
+    # Re-calculate map since features have been added
+    self._agg_map = self.calculate_aggregation_map()</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.calculate_aggregation_map"><code class="name flex">
+<span>def <span class="ident">calculate_aggregation_map</span></span>(<span>self) ‑> Optional[List[List[int]]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a list of indices to map sparse to dense.
+If the feature sets match
+no mapping can be created (except for 1-to-1).
+Return None and downstream
+processes should interpret that as there being no difference in pre and post
+encoded features.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_aggregation_map(self) -&gt; Union[List[List[int]], None]:
+    &#34;&#34;&#34;
+    Generate a list of indices to map sparse to dense.  If the feature sets match
+    no mapping can be created (except for 1-to-1).  Return None and downstream
+    processes should interpret that as there being no difference in pre and post
+    encoded features.
+    &#34;&#34;&#34;
+    if len(self.feature_names) == len(self.original_feature_names):
+        return None
+    else:
+        return [
+            [
+                j
+                for (j, val) in enumerate(self.feature_names)
+                if ((x == val) or (x == &#34;_&#34;.join(val.split(&#34;_&#34;)[:-1])))
+            ]
+            for (i, x) in enumerate(self.original_feature_names)
+        ]</code></pre>
+</details>
+</dd>
+<dt id="ablation.dataset.NumpyDataset.stratified_subsample"><code class="name flex">
+<span>def <span class="ident">stratified_subsample</span></span>(<span>self, percentage, random_state=42)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def stratified_subsample(self, percentage, random_state=42):
+    _, self.X_train, _, self.y_train = train_test_split(
+        self.X_train,
+        self.y_train,
+        test_size=int(len(self.y_train) * percentage),
+        random_state=random_state,
+        stratify=self.y_train,
+    )
+    _, self.X_test, _, self.y_test = train_test_split(
+        self.X_test,
+        self.y_test,
+        test_size=int(len(self.y_test) * percentage),
+        random_state=random_state,
+        stratify=self.y_test,
+    )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="ablation" href="index.html">ablation</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="ablation.dataset.load_data" href="#ablation.dataset.load_data">load_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_adult_data" href="#ablation.dataset.prepare_adult_data">prepare_adult_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_german_data" href="#ablation.dataset.prepare_german_data">prepare_german_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_har_data" href="#ablation.dataset.prepare_har_data">prepare_har_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_spambase_data" href="#ablation.dataset.prepare_spambase_data">prepare_spambase_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_synthetic_categorical_data" href="#ablation.dataset.prepare_synthetic_categorical_data">prepare_synthetic_categorical_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_synthetic_data" href="#ablation.dataset.prepare_synthetic_data">prepare_synthetic_data</a></code></li>
+<li><code><a title="ablation.dataset.prepare_synthetic_multiclass_data" href="#ablation.dataset.prepare_synthetic_multiclass_data">prepare_synthetic_multiclass_data</a></code></li>
+<li><code><a title="ablation.dataset.split_dataset" href="#ablation.dataset.split_dataset">split_dataset</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="ablation.dataset.NumpyDataset" href="#ablation.dataset.NumpyDataset">NumpyDataset</a></code></h4>
+<ul class="">
+<li><code><a title="ablation.dataset.NumpyDataset.X_test" href="#ablation.dataset.NumpyDataset.X_test">X_test</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.X_train" href="#ablation.dataset.NumpyDataset.X_train">X_train</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.add_random_features" href="#ablation.dataset.NumpyDataset.add_random_features">add_random_features</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.agg_map" href="#ablation.dataset.NumpyDataset.agg_map">agg_map</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.calculate_aggregation_map" href="#ablation.dataset.NumpyDataset.calculate_aggregation_map">calculate_aggregation_map</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.dense_random_feat_idx" href="#ablation.dataset.NumpyDataset.dense_random_feat_idx">dense_random_feat_idx</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.feature_names" href="#ablation.dataset.NumpyDataset.feature_names">feature_names</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.n_classes" href="#ablation.dataset.NumpyDataset.n_classes">n_classes</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.original_feature_names" href="#ablation.dataset.NumpyDataset.original_feature_names">original_feature_names</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.random_feat_idx" href="#ablation.dataset.NumpyDataset.random_feat_idx">random_feat_idx</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.stratified_subsample" href="#ablation.dataset.NumpyDataset.stratified_subsample">stratified_subsample</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.y_test" href="#ablation.dataset.NumpyDataset.y_test">y_test</a></code></li>
+<li><code><a title="ablation.dataset.NumpyDataset.y_train" href="#ablation.dataset.NumpyDataset.y_train">y_train</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
