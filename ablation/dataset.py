@@ -53,13 +53,19 @@ class NumpyDataset:
     def add_random_features(self, n_rand_features=4, random_state=42):
 
         np.random.seed(random_state)
-        random_train = np.random.normal(0, 1, (len(self.X_train), n_rand_features))
-        random_test = np.random.normal(0, 1, (len(self.X_test), n_rand_features))
+        random_train = np.random.normal(
+            0, 1, (len(self.X_train), n_rand_features)
+        )
+        random_test = np.random.normal(
+            0, 1, (len(self.X_test), n_rand_features)
+        )
         self.X_train = np.concatenate([self.X_train, random_train], -1)
         self.X_test = np.concatenate([self.X_test, random_test], -1)
 
         # Calculate the random feature names
-        random_feature_names = [f"#RANDOM{idx}#" for idx in range(n_rand_features)]
+        random_feature_names = [
+            f"#RANDOM{idx}#" for idx in range(n_rand_features)
+        ]
 
         # Add random feature names to list of post-encoded features
         self.feature_names += random_feature_names
@@ -96,7 +102,11 @@ class NumpyDataset:
     @property
     def random_feat_idx(self):
         return np.array(
-            [idx for (idx, val) in enumerate(self.feature_names) if "#RANDOM" in val]
+            [
+                idx
+                for (idx, val) in enumerate(self.feature_names)
+                if "#RANDOM" in val
+            ]
         )
 
     @property
@@ -295,12 +305,9 @@ def prepare_har_data() -> NumpyDataset:
 
     # Load Columns
     feature_names = pd.read_table(
-        path.join(DATA_PATH, "har_features.txt"),
-        sep="\s+",
-        header=None,
-        squeeze=True,
+        path.join(DATA_PATH, "har_features.txt"), sep="\s+", header=None
     )
-    feature_names = feature_names[1].values
+    feature_names = feature_names.iloc[:, 1].values
 
     # Standard Scaler
     scaler = StandardScaler().fit(x_train)
@@ -335,12 +342,9 @@ def split_dataset(
 
     assert test_perc > 0, "Must have a test set"
 
-    (
-        X_train,
-        X_test,
-        y_train,
-        y_test,
-    ) = train_test_split(X, y, test_size=test_perc, random_state=42)
+    (X_train, X_test, y_train, y_test,) = train_test_split(
+        X, y, test_size=test_perc, random_state=42
+    )
 
     if val_perc > 0:
         (X_train, X_val, y_train, y_val,) = train_test_split(

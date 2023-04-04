@@ -4,5 +4,7 @@ seaborn
 pandas
 scikit-learn>=1.1.0
 captum
-pytorch_lightning>=1.6.5
-torch
+torch>=1.13.1, < 2.0.0
+pytorch_lightning>=1.6.5, < 2.0.0
+certifi>=2022.12.07
+werkzeug >= 2.2.3
