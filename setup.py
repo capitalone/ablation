@@ -69,7 +69,6 @@ EXTRAS_REQUIRE["dev"] = (
 
 HERE = Path(__file__).absolute().parent
 INSTALL_REQUIRES = (HERE / "requirements.txt").read_text().split("\n")
-
 META_FILE = (HERE / META_PATH).read_text()
 
 
