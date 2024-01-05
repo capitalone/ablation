@@ -134,7 +134,7 @@ impact Your rights to use Your own Contributions for any other purpose.
 [Sign the Corporate Agreement](https://docs.google.com/forms/d/e/1FAIpQLSeAbobIPLCVZD_ccgtMWBDAcN68oqbAJBQyDTSAQ1AkYuCp_g/viewform?usp=send_form)
 
 
-### Code of Conduct
+### Code of Conduct 
 
 This project adheres to the [Open Code of Conduct](https://developer.capitalone.com/resources/code-of-conduct)
 By participating, you are
