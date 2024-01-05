@@ -1,4 +1,5 @@
 numpy
+pillow>=10.0
 matplotlib
 seaborn
 pandas
