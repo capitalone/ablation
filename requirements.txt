@@ -6,6 +6,6 @@ pandas
 scikit-learn>=1.1.0
 captum
 torch>=2.0.0
-pytorch_lightning>=1.6.5, < 2.0.0
+pytorch_lightning>=1.6.5, < 2.0.0, !=1.9.5
 certifi>=2024.7.4
 werkzeug >= 2.2.3
