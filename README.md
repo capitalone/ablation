@@ -16,7 +16,7 @@ This implementation can be used to reproduce the experiments in [BASED-XAI: Brea
 Pip
 
 ```sh
-conda create -n ablation python=3.9 --yes
+conda create -n ablation python=3.11 --yes
 source activate ablation
 pip install ablation
 ```
